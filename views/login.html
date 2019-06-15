@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <title>Proceed Transaction</title>
+    <style type="text/css">
+    	html, body, .container{
+    		height: 100%;
+    	}
+    </style>
+  </head>
+  <body>
+  <div style="height:15%;" >
+   
+  </div>
+  <div class = "container" >
+    <div class = "col text-center"> 
+     <h3>Login</h3>
+    </div>
+    <br>
+  	<div class="row align-items-center">
+  		<div class="col-md-6 offset-3">
+  			<div style="border: 2px solid gray; padding: 25px;">
+  			<form id="form">
+  			  <div class="form-group">
+  			    <label >Email ID</label>
+  			    <input type="Email" class="form-control" name="email" placeholder="Enter Email">
+          </div>
+          <br>
+          <div class="col text-center">
+  			    <button type="submit" class="btn btn-primary" >Login</button>
+          </div>
+  			</form>
+  		</div>
+  		</div>
+  	</div>
+  </div>
+  <script>
+    window.$ = window.jQuery = require('jquery');
+    window.Bootstrap = require('bootstrap');
+  </script>
+  <script>
+    var electron = require('electron');
+    var {ipcRenderer} = electron;
+    $("form").submit(function(e){
+      console.log('doing');
+      $("button:eq(0)").attr('disabled', 'disabled');
+      ipcRenderer.send('login', {email: document.getElementById('form').email.value});
+      $("button:eq(0)").html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>  Now click the link you recieved at the time of signup!');
+      e.preventDefault();
+    });
+    //ipcRenderer.send('', data);
+  </script>
+  </body>
+</html

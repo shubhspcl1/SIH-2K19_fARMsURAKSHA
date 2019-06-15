@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <title>Proceed Transaction</title>
+    <style type="text/css">
+    	html, body, .container{
+    		height: 100%;
+    	}
+    </style>
+  </head>
+  <body>
+  <div style="height:15%;" >
+   
+  </div>
+  <div class = "container" >
+    <div class = "col text-center"> 
+     <h3>Production</h3>
+    </div>
+    <br><br>
+  	<div class="row align-items-center">
+  		<div class="col-md-6 offset-3">
+  			<form action="/mineBlock" method="POST">
+  			  <div class="form-group">
+  			    <label >Quantity</label>
+  			    <input type="text" class="form-control" name="amount" placeholder="Add Amount">
+  			  </div>
+          <div>
+           <label >Product Id</label>
+           <input type="text" class="form-control" name="product" placeholder="Add Product id">
+          </div>
+          <br>
+          <div class="col text-center">
+  			    <button type="submit" class="btn btn-primary" >Submit</button>
+          </div>
+  			</form>
+  		</div>
+  	</div>
+  </div>
+  <script>
+    window.$ = window.jQuery = require('jquery');
+    window.Bootstrap = require('bootstrap');
+  </script>
+  <script>
+    
+  </script>
+</body>
+</html

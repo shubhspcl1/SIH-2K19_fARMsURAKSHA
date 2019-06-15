@@ -1,0 +1,45 @@
+{
+  "name": "sih-electron-app",
+  "version": "1.0.0",
+  "description": "An electron app for SIH",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "rebuild-modules": "electron-rebuild"
+  },
+  "author": "Udbhav Gambhir <ngudbhav05@hotmail.com> (https://www.ngudbhav.me)",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^3.0.4",
+    "body-parser": "^1.18.3",
+    "bootstrap": "^4.3.1",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^2.0.3",
+    "cookie-parser": "^1.4.4",
+    "crypto-js": "^3.1.9-1",
+    "cryptr": "^4.0.2",
+    "electron": "^4.0.6",
+    "elliptic": "^6.4.1",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "font-awesome": "^4.7.0",
+    "hbs": "^4.0.2",
+    "html": "^1.0.0",
+    "jquery": "^3.3.1",
+    "json-pretty-html": "^1.1.6",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.4.16",
+    "nedb": "^1.8.0",
+    "nodemailer": "^5.1.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "popper.js": "^1.14.7",
+    "qrcode": "^1.3.3",
+    "request": "^2.88.0",
+    "socket.io-client": "^2.2.0",
+    "ws": "^6.1.4"
+  },
+  "devDependencies": {
+    "electron-rebuild": "^1.8.4"
+  }
+}

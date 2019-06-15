@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <title>Transaction</title>
+    <style type="text/css">
+    	html, body, .container{
+    		height: 100%;
+    	}
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">fARM sURAKSHA</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+    <ul class="navbar-nav mr-auto" >
+      <li class="nav-item" onclick="$('.spec').hide();$('#account').show();" id="accountnav">
+        <a class="nav-link" href="#">My Account</a>
+      </li>
+      <li class="nav-item" onclick="$('.spec').hide();$('#transactionForm').show();">
+        <a class="nav-link" href="#">Transaction</a>
+      </li>
+      <li class="nav-item" onclick="$('.spec').hide();$('#historyForm').show();" id="lhistory">
+        <a class="nav-link" href="#">History</a>
+      </li>
+      <li class="nav-item " onclick="$('.spec').hide();$('#blockForm').show();blockchain();" id="blocks">
+        <a class="nav-link" href="#">Blockchain</a>
+      </li>  
+      <li class="nav-item " onclick="$('.spec').hide();$('#productionForm').show();" id="factoryOnly">
+        <a class="nav-link" href="#">Production</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<br><br>
+  <div class = "container-fluid" >
+    <div class="row">
+      <div class="col-md-6 offset-3">
+        <h2 id="name" style="text-align: center;"></h2>
+      </div>
+    </div>
+      <div class = "row spec" id="productionForm" style="display: none;" >
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class = "col text-center"> 
+               <h3>Production</h3>
+              </div>
+            </div>
+          </div>
+          <div class="row align-items-center">
+            <div class="col-md-6 offset-3">
+              <form id="proForm">
+                <div class="form-group">
+                  <label >Quantity</label>
+                  <input type="text" class="form-control" name="amount" placeholder="Add Quantity">
+                </div>
+                <div>
+                 <label >Product</label>
+                 <input type="text" class="form-control" name="product" placeholder="Add Product">
+                </div>
+                <br>
+                <div class="col text-center">
+                  <button type="submit" class="btn btn-primary" >Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <br><br>
+    <!-- <div class="row align-items-center">
+      
+    </div> -->
+  </div>
+  <div class="row spec" id="account" style="display: none;">
+    <div class="container-fluid">
+      <br><br>
+      <table class="table table-hover table-bordered" style="text-align: center;overflow: auto;">
+      
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>
+      <tbody id="balTable"></tbody>
+    </center>
+    </table>
+    </div>
+  </div>
+
+    <div class="row spec" id="transactionForm" style="display: none;">
+    <div class="col-6">
+      <div class = "text-center"> 
+      <h3>Transaction</h3>
+    </div>
+    <br><br> 
+    <div class="row align-items-center">
+      <div class="col-md-6 offset-3">
+        <form id="transForm">
+          <div class="form-group">
+            <label >To</label>
+            <input type="text" class="form-control" name="address" placeholder="Reciever" id="ai" disabled="disabled">
+           </div>
+          <div class="form-group">
+            <label >Quantity</label>
+            <input type="text" class="form-control" name="amount" placeholder="Add Quantity">
+          </div>
+          <div>
+           <label >Product</label>
+           <input type="text" class="form-control" name="product" placeholder="Add Product">
+          </div>
+          <br>
+          <div class="col text-center">
+            <button type="submit" class="btn btn-primary" >Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    </div>
+    <div class="col-6">
+    <div class = "col text-center"> 
+      <h3>Buyers</h3>
+      <label>Select to send</label>
+      <br><br><br>
+      <table class="table table-hover" style="cursor: pointer;overflow: auto;">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Category</th>
+          </tr>
+        </thead>
+        <tbody id="placingUsers">
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+  </div>
+  <div id="historyForm" class="row spec" style="display: none;">
+    <div class="container-fluid">
+      <br><br>
+      <table class="table table-hover table-bordered" style="text-align: center;">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Product</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>
+      <tbody id="fetchHistory"></tbody>
+    </table>
+    </div>
+  </div>
+</div>
+  <div id="blockForm" class="row spec" style="display: none;">
+    <div class="container-fluid">
+      <br><br>
+      <table class="table table-hover table-bordered" style="text-align: center;">
+      <thead>
+        <tr>
+          
+          <th>Blocks</th>
+        </tr>
+      </thead>
+      <tbody id="fetchBlocks"></tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+<center><canvas id="canvas" class="spec"></canvas></center>
+  <script>
+  window.$ = window.jQuery = require('jquery');
+  var electron = require('electron');
+    var {ipcRenderer} = electron;
+  </script>
+  <script>
+    var users;
+    $(document).ready(function($) {
+      ipcRenderer.send('details');
+      ipcRenderer.send('getUsers');
+    });
+    ipcRenderer.on('gettingDetails', function(e, item){
+      $("#profileAddress").html(item.address);
+      $("#emailAddress").html(item.email);
+      $("#name").html(item.name);
+      if(item.type != 'f'){
+        $("#factoryOnly").hide();
+      }
+      //$("#btcAddress").html(item.btcAddress);
+      //$("#balAddress").html(item.balance);
+    });
+    $("#land-see-arts-culture").click(function(){
+      $(".content").hide();
+      $("#production").show();
+      ipcRenderer.send('balances');
+    });
+    $("#land-see-fashion").click(function(){
+      $(".content").hide();
+      $("#transaction").show();
+      ipcRenderer.send('balances');
+    });
+    $("#accountnav").click(function(){
+      $(".content").hide();
+      $("#profile").show();
+      ipcRenderer.send('balances');
+    });
+    $("#lhistory").click(function(e){
+      console.log('sending');
+      $(".content").hide();
+      $("#fetchHistory").show();
+      ipcRenderer.send('history');
+    });
+    ipcRenderer.on('balances', function(e, item){
+      console.log(item);
+      var s = '';
+      for(var i=0;i<item.length;i++){
+        if(item[i] != undefined && item[i].product != 'NA')
+          s += '<tr><td>'+item[i].product+'</td><td>'+item[i].amount+'</td></tr>';
+      }
+      $("#balTable").html(s);
+    });
+    ipcRenderer.on('sendUsers', function(e, item){
+      //console.log(item);
+      item = JSON.parse(item);
+      var s = '';
+      var x = '';
+      users = item;
+      for(var i=0;i<item.length;i++){
+        //console.log(item[i]);
+        if(item[i].type == 'f'){
+          x = 'Producer';
+        }
+        else if(item[i].type == 'd'){
+          x = 'Distributor';
+        }
+        else if(item[i].type == 'w'){
+          x = 'Wholesaler';
+        }
+        else{
+          x = 'Retailer';
+        }
+        s += '<tr onclick="placeValue(\''+item[i].btcAddress+'\');"><td>'+item[i].name+'</td><td>'+x+'</td></tr>';
+      }
+      //console.log(s);
+      $("#placingUsers").html(s);
+    });
+    function placeValue(e){
+      $("#ai").val(e);
+    }
+    $("#transForm").submit(function(e){
+      ipcRenderer.send('transact', {address:document.getElementById('transForm').address.value, amount:parseInt(document.getElementById('transForm').amount.value), product:document.getElementById('transForm').product.value});
+      e.preventDefault();
+    });
+    $("#proForm").submit(function(e){
+      ipcRenderer.send('produce', {amount:parseInt(document.getElementById('proForm').amount.value), product:document.getElementById('proForm').product.value});
+      e.preventDefault();
+    });
+    ipcRenderer.on('history', function(e, item){
+      
+      var s = '';
+      console.log(item);
+      for(var i in item){
+        if(item[i].data.length == 1){
+          s+='<tr><td>'+getName(item[i].data[0].txOuts[0].address)+'</td><td>'+item[i].data[0].txOuts[0].product+'</td><td>'+item[i].data[0].txOuts[0].amount+'</td></tr>';
+        }
+        else{
+          s+='<tr><td>'+getName(item[i].data[1].txOuts[0].address)+'</td><td>'+item[i].data[1].txOuts[0].product+'</td><td>'+item[i].data[1].txOuts[0].amount+'</td></tr>';
+        }
+      }
+      console.log(s);
+      $("#fetchHistory").html(s);
+    });
+    ipcRenderer.on('transactionDone', function(e, item){
+      console.log(item);
+      var QRCode = require('qrcode');
+      var canvas = document.getElementById('canvas');
+      QRCode.toCanvas(canvas, item, function (error) {
+        if (error) console.error(error)
+          console.log('success!');
+        $("#canvas").show();
+      });
+    });
+    function getName(e){
+      for(var i in users){
+        if(users[i].btcAddress == e){
+          return users[i].name;
+        }
+      }
+    }
+    function blockchain(){
+      console.log('fetching');
+      ipcRenderer.send('getdata');
+    }
+    ipcRenderer.on('newData', function(e, item){
+      console.log(item);
+      var s = '';
+      for(var i in item){
+        s += '<tr><td>'+JSON.stringify(item[i], null, 4)+'</td></tr>';
+      }
+      $("#fetchBlocks").html(s);
+    });
+    // users
+  </script>
+</body>
+</html

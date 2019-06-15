@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+	<script>
+		window.$ = window.jQuery = require('jquery');
+		window.Bootstrap = require('bootstrap');
+	</script>
+	<script>
+		var electron = require('electron');
+		var {ipcRenderer} = electron;
+		$("getChain").click(function(e){
+			ipcRenderer.send('getBlocks', /*Id of logged in user, item.var*/);
+		});
+		$("produce").click(function(e){
+			ipcRenderer.send('mineBlock', /*Id of logged in user*/);
+		});
+		$("getBal").click(function(e){
+			ipcRenderer.send('balance', /*Id of logged in user*/);
+		});
+		$("getAdd").click(function(e){
+			ipcRenderer.send('address', /*Id of logged in user*/);
+		});
+		$("mineTransaction").click(function(e){
+			ipcRenderer.send('mineTransaction', /*Full Data*/);
+		});
+		ipcRenderer.on('success', function(e, item){
+			//Transaction Success
+			console.log(item);
+		});
+		ipcRenderer.on('blocks', function(e, item){
+			//Get full blockchain
+			console.log(item);
+		});
+		ipcRenderer.on('balance', function(e, item){
+			console.log(item);
+		});
+		ipcRenderer.on('address', function(e, item){
+			console.log(item);
+		});
+		ipcRenderer.on('mineTransaction', function(e, item){
+			console.log(item);
+		});
+	</script>
+</body>
+</html>
